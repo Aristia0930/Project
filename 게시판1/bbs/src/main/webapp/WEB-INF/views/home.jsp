@@ -31,8 +31,8 @@
                 </a>
 
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white">Features</a></li>
+                    <li><a href="<c:url value='/user' />" class="nav-link px-2 text-secondary">Home</a></li>
+                    <li><a href="<c:url value='/board' />" class="nav-link px-2 text-white">게시판</a></li>
                     <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
                     <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
                     <li><a href="#" class="nav-link px-2 text-white">About</a></li>
@@ -41,17 +41,19 @@
 
 
                 <div class="text-end">
-                    <button type="button" class="btn btn-warning">
+
                         <c:choose>
                             <c:when test="${not empty userInfo}">
-                                <a href="<c:url value='/user/logout' />" class="btn btn-warning text-white text-decoration-none">로그아웃</a>
+                            <form action="<c:url value='/user/logout' />" method="post" style="display: inline;">
+                                <button type="submit" class="btn btn-warning text-white text-decoration-none">로그아웃</button>
+                            </form>
                             </c:when>
                             <c:otherwise>
                                 <a href="<c:url value='/user/login' />" class="btn btn-warning text-white text-decoration-none">로그인</a>
                             </c:otherwise>
                         </c:choose>
 
-                    </button>
+
 
                 </div>
             </div>

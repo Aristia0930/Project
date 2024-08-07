@@ -1,5 +1,7 @@
 package org.example.bbs.user;
 
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -69,6 +71,17 @@ public class UserController {
     }
 
     //로그아웃
+    @PostMapping("/logout")
+    public String logout(HttpServletRequest request){
+        //세션 삭제
+        HttpSession session = request.getSession(false);
+
+        if(session !=null){
+            session.invalidate();
+        }
+
+        return "redirect:/user";
+    }
 
 
 
