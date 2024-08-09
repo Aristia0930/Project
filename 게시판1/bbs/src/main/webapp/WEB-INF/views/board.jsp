@@ -63,7 +63,7 @@
     <h1 class="board-text">게시판</h1>
 
     <div class="actions">
-        <a href="create.html" class="btns">글 작성하기</a>
+        <a href="#" class="btns" onclick="createBoard()">글 작성하기</a>
     </div>
     <table>
         <thead>
@@ -81,6 +81,20 @@
 </div>
 
 <script src="<%= request.getContextPath() %>/assets/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function createBoard(){
+        var info="${userInfo}";
+        if(info){
+            window.location.href = "/board/create";
+
+        }
+        else{
+            alert("로그인해주세요")
+        }
+
+
+    }
+</script>
 </body>
 
 </html>

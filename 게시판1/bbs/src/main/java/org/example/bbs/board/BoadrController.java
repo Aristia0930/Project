@@ -12,4 +12,9 @@ public class BoadrController {
     public String boardMain(){
         return "board";
     }
+
+    @GetMapping("/create")
+    public String create(){
+        return "create";
+    }
 }
