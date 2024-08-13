@@ -65,21 +65,31 @@
 </header>
 
 <div class="container">
-  <h1>게시글 작성</h1>
-  <form id="create-post-form" name="create" action="/board/create-content" method="post">
+  <h1>게시글 수정</h1>
+  <form id="create-post-form" name="create" action="/board/edit-post" method="post">
     <div class="form-group">
       <label for="title">제목</label>
-      <input type="text" id="title" name="title" required>
+      <input type="text" id="title" name="title" value="${Board.title}" required>
     </div>
     <div class="form-group">
       <label for="content">내용</label>
-      <textarea id="content" name="contents" required></textarea>
+      <textarea id="content" name="contents" rows="4" cols="50" required></textarea>
     </div>
-    <button type="submit" class="btns">작성하기</button>
+    <input type="hidden" name="boardId" value="${Board.boardId}">
+    <button type="submit" class="btns">수정하기</button>
   </form>
 </div>
 
 <script src="<%= request.getContextPath() %>/assets/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var contentText = `${Board.contents}`; // 서버에서 전달된 텍스트
+      var textarea = document.getElementById('content');
+
+      // 공백과 줄 바꿈 제거
+      textarea.value = contentText.trim();
+    });
+  </script>
 </body>
 
 </html>

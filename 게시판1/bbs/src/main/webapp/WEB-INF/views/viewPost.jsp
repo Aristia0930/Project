@@ -1,25 +1,15 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: kjk98
-  Date: 2024-08-08
-  Time: 오전 12:16
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>게시판</title>
-    <script src="<%= request.getContextPath() %>/assets/board.js"></script>
-    <link href="<%= request.getContextPath() %>/assets/dist/css/board.css" rel="stylesheet">
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/headers/">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+    <title>게시글 보기</title>
+    <link href="<%= request.getContextPath() %>/assets/dist/css/viewPost.css" rel="stylesheet">
     <link href="<%= request.getContextPath() %>/assets/dist/css/bootstrap.min.css" rel="stylesheet">
-
 </head>
 <body>
 <header class="p-3 text-bg-dark">
@@ -58,64 +48,57 @@
         </div>
     </div>
 </header>
+<div class="containers">
+    <div class="post-header">
+        <h2 id="post-title">${Board.title}</h2>
+        <c:if test="${check}">
+            <div class="actions">
+                <button class="btns" id="edit-button" onclick="edit(${Board.boardId})">수정하기</button>
+                <button class="btns" id="delete-button">삭제하기</button>
+            </div>
+        </c:if>
 
-<div class="container">
-    <h1 class="board-text">게시판</h1>
-
-    <div class="actions">
-        <a href="#" class="btns" onclick="createBoard()">글 작성하기</a>
     </div>
-    <table>
-        <thead>
-        <tr>
-            <th>번호</th>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>작성일</th>
-        </tr>
-        </thead>
-        <tbody id="post-list">
-        <!-- 게시글 목록이 여기에 추가됩니다 -->
-        <c:forEach var="post" items="${LIST}">
+    <div class="post-info">
+        <p id="post-author">작성자: ${Board.userName}</p>
+        <p id="post-date">작성날짜: ${Board.created}</p>
+    </div>
+    <div id="contentdiv">
+        <p id="post-content">${Board.contents}</p>
+    </div>
 
-            <tr onclick="viewPost(${post.boardId})">
+    <!-- 댓글 섹션 -->
+    <div id="comments-section">
+        <h3>댓글</h3>
+        <!-- 댓글 작성 폼 -->
+        <div id="comment-form">
+            <h4>댓글 작성하기</h4>
+            <textarea id="comment-content" rows="4" placeholder="댓글을 입력하세요..."></textarea>
+            <button class="btns" id="submit-comment">댓글 작성</button>
+        </div>
 
-                <td>${post.boardId}</td>
-                <td>${post.title}</td>
-                <td>${post.userName}</td>
-                <td>${post.created}</td>
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
+        <!-- 기존 댓글 목록 -->
+        <div id="comments">
+            <div class="comment">
+                <p class="comment-author">작성자: 댓글 작성자 이름</p>
+                <p class="comment-content">댓글 내용</p>
+                <button class="reply-btn">답글</button>
+
+                <!-- 대댓글 -->
+                <div class="reply">
+                    <p class="comment-author">작성자: 대댓글 작성자 이름</p>
+                    <p class="comment-content">대댓글 내용</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
 <script src="<%= request.getContextPath() %>/assets/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-        // Retrieve the flash message from the server-side
-        var message ="${create}";
+    function edit(boardId){
+        window.location.href = "/board/edit?boardId="+boardId;
 
-        if (message) {
-            alert(message);
-
-        }
-    function createBoard(){
-        var info="${userInfo}";
-        if(info){
-            window.location.href = "/board/create";
-
-        }
-        else{
-            alert("로그인해주세요")
-        }
-
-
-    }
-
-    function viewPost(boardId) {
-        window.location.href = "/board/view?boardId="+boardId;
     }
 </script>
 </body>
-
 </html>
