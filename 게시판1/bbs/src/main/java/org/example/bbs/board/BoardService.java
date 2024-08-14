@@ -63,4 +63,15 @@ public class BoardService {
             return false;
         }
     }
+
+    @Transactional
+    public boolean delete(Long boardId) {
+        try {
+            boardRepository.deleteByBoardId(boardId);
+            return true; // 저장 성공 시 true 반환
+        } catch (Exception e) {
+            // 예외 발생 시 false 반환
+            return false;
+        }
+    }
 }

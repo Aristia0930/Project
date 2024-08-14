@@ -54,7 +54,7 @@
         <c:if test="${check}">
             <div class="actions">
                 <button class="btns" id="edit-button" onclick="edit(${Board.boardId})">수정하기</button>
-                <button class="btns" id="delete-button">삭제하기</button>
+                <button class="btns" id="delete-button" onclick="deleteClick(${Board.boardId})">삭제하기</button>
             </div>
         </c:if>
 
@@ -99,6 +99,25 @@
         window.location.href = "/board/edit?boardId="+boardId;
 
     }
+
+    function deleteClick(boardId) {
+        if (confirm("정말로 삭제하시겠습니까?")) {
+            fetch("/board/delete?boardId=" + boardId, {
+                method: "DELETE"
+            })
+                .then(response => {
+                    if (response.redirected) {
+                        alert("게시글 삭제 성공");
+                        window.location.href = response.url;
+                    } else {
+                        alert("게시글 삭제 실패");
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    }
+
+
 </script>
 </body>
 </html>

@@ -88,22 +88,38 @@ public class BoadrController {
 
     //게시글 수정
     @PostMapping("/edit-post")
-    public String editPost(String title, String contents,Long boardId, HttpSession session, RedirectAttributes redirectAttributes){
+    public String editPost(String title, String contents,Long boardId, HttpSession session, RedirectAttributes redirectAttributes) {
         Board board = boardService.viewPost(boardId);
         board.setTitle(title);
         board.setContents(contents);
         board.setUpdated(LocalDateTime.now());
-        boolean check =boardService.editPage(board);
-        if (check){
+        boolean check = boardService.editPage(board);
+        if (check) {
             redirectAttributes.addFlashAttribute("create", "게시글 수정 성공");
             return "redirect:/board";
-        }
-        else {
+        } else {
             redirectAttributes.addFlashAttribute("create", "게시글 수정 실패");
             return "redirect:/board";
 
         }
-
-
     }
+
+        //게시글 삭제
+        @DeleteMapping("/delete")
+        public String delete(@RequestParam("boardId")Long boardId,
+                             RedirectAttributes redirectAttributes){
+            boolean check = boardService.delete(boardId);
+
+            if (check) {
+                redirectAttributes.addFlashAttribute("create", "게시글 삭제 성공");
+                return "redirect:/board";
+            } else {
+                redirectAttributes.addFlashAttribute("create", "게시글 삭제 실패");
+                return "/board";
+
+            }
+        }
+
+
+
 }
