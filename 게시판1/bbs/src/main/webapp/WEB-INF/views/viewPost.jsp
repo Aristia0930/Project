@@ -20,7 +20,7 @@
             </a>
 
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="<c:url value='/user' />" class="nav-link px-2 text-white">Home</a></li>
+                <li><a href='/user' class="nav-link px-2 text-white">Home</a></li>
                 <li><a href="<c:url value='/board' />" class="nav-link px-2 text-secondary">게시판</a></li>
                 <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
                 <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
@@ -72,9 +72,10 @@
         <h3>댓글</h3>
         <!-- 댓글 작성 폼 -->
         <div id="comment-form">
-            <h4>댓글 작성하기</h4>
             <textarea id="comment-content" rows="4" placeholder="댓글을 입력하세요..."></textarea>
-            <button class="btns" id="submit-comment">댓글 작성</button>
+            <div id="comment-submit-container">
+                <button class="btns" id="submit-comment">댓글 작성</button>
+            </div>
         </div>
 
         <!-- 기존 댓글 목록 -->

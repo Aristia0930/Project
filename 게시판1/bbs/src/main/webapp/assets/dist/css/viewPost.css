@@ -141,6 +141,7 @@ h2 {
 /* 댓글 작성 폼 스타일 */
 #comment-form {
     margin-top: 20px;
+    position: relative;
 }
 
 #comment-form textarea {
@@ -150,6 +151,9 @@ h2 {
     border: 1px solid #ddd;
     margin-bottom: 10px;
     resize: none;
+}
+#comment-submit-container {
+    text-align: right;
 }
 
 #submit-comment {
@@ -161,6 +165,7 @@ h2 {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    margin: 10px;
 }
 
 #submit-comment:hover {
