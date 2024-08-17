@@ -123,6 +123,7 @@ h2 {
     border: 1px solid #ccc;
     border-radius: 5px;
     margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .reply-btn {
@@ -132,6 +133,7 @@ h2 {
     padding: 5px 10px;
     border-radius: 5px;
     cursor: pointer;
+    margin-bottom: 5px;
 }
 
 .reply-btn:hover {
@@ -144,7 +146,7 @@ h2 {
     position: relative;
 }
 
-#comment-form textarea {
+.comment-form textarea {
     width: 100%;
     padding: 10px;
     border-radius: 5px;
@@ -152,11 +154,26 @@ h2 {
     margin-bottom: 10px;
     resize: none;
 }
-#comment-submit-container {
+
+#reply-form {
+    margin-top: 20px;
+    position: relative;
+}
+
+.reply-form textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    resize: none;
+}
+
+.comment-submit-container {
     text-align: right;
 }
 
-#submit-comment {
+.submit-comment {
     display: inline-block;
     padding: 10px 20px;
     font-size: 1rem;
@@ -168,6 +185,7 @@ h2 {
     margin: 10px;
 }
 
-#submit-comment:hover {
+.submit-comment:hover {
     background-color: #0056b3;
 }
+

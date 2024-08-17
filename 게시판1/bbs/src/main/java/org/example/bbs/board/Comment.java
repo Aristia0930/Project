@@ -11,27 +11,33 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "board")
-public class Board {
+@Table(name = "comment")
+public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long replyId;
+
+    @Column
     private Long boardId;
 
     @Column
-    private String title;
+    private Long commentId;
 
     @Column
-    private String userName;
+    private String userId;
 
     @Column
     private String contents;
 
     @Column
+    private String userName;
+
+    @Column
     private int state;
 
     @Column
-    private String userId;
+    private String commentUserId;
 
     @Column
     private LocalDateTime created;

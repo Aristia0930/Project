@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>게시글 보기</title>
-    <link href="<%= request.getContextPath() %>/assets/dist/css/viewPost.css" rel="stylesheet">
+    <link href="<%= request.getContextPath() %>/assets/dist/css/viewPost.css?after" rel="stylesheet">
     <link href="<%= request.getContextPath() %>/assets/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -71,31 +71,86 @@
     <div id="comments-section">
         <h3>댓글</h3>
         <!-- 댓글 작성 폼 -->
-        <div id="comment-form">
-            <textarea id="comment-content" rows="4" placeholder="댓글을 입력하세요..."></textarea>
-            <div id="comment-submit-container">
-                <button class="btns" id="submit-comment">댓글 작성</button>
+        <form class="comment-form" name="comment" action="/comment/create" method="post">
+            <textarea name="contents" id="comment-content" rows="4" placeholder="댓글을 입력하세요..."></textarea>
+            <div class="comment-submit-container">
+                <button type="submit" class="submit-comment">댓글 작성</button>
             </div>
-        </div>
+            <input type="hidden" name="boardId" value="${Board.boardId}">
+        </form>
 
         <!-- 기존 댓글 목록 -->
-        <div id="comments">
+        <div class="comment">
+            <c:forEach var="comment" items="${comments}">
+
+                <c:if test="${comment.commentId ==0}">
             <div class="comment">
-                <p class="comment-author">작성자: 댓글 작성자 이름</p>
-                <p class="comment-content">댓글 내용</p>
-                <button class="reply-btn">답글</button>
+
+
+                <p class="comment-author">작성자: ${comment.userName}</p>
+                <p class="comment-content">${comment.contents}</p>
+                <div class="comment-submit-container">
+                    <button class="reply-btn" >답글</button>
+                </div>
+
+
+
+
+                <form class="reply-form" style="display:none;" name="reply" action="/comment/reply-create" method="post">
+                    <textarea name="contents" rows="4" placeholder="댓글을 입력하세요..."></textarea>
+                    <input type="hidden" name="boardId" value="${Board.boardId}">
+                    <input type="hidden" name="replyId" value="${comment.replyId}">
+                    <div class="comment-submit-container">
+                    <button class="submit-comment">답글 작성</button>
+                    </div>
+                </form>
+
+
+
 
                 <!-- 대댓글 -->
+
+            </div></c:if>
+                <c:if test="${comment.commentId !=0}">
                 <div class="reply">
-                    <p class="comment-author">작성자: 대댓글 작성자 이름</p>
-                    <p class="comment-content">대댓글 내용</p>
-                </div>
-            </div>
+                    <p class="comment-author">작성자:${comment.userName}</p>
+                    <p class="comment-content">${comment.contents}</p>
+                </div></c:if>
+            </c:forEach>
         </div>
     </div>
 </div>
 <script src="<%= request.getContextPath() %>/assets/dist/js/bootstrap.bundle.min.js"></script>
 <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // 모든 답글 버튼에 대해 클릭 이벤트 리스너 추가
+        const replyButtons = document.querySelectorAll('.reply-btn');
+
+        replyButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // 현재 버튼과 같은 댓글 내의 답글 작성 폼을 찾기
+                const commentDiv = this.closest('.comment');
+                const replyForm = commentDiv.querySelector('.reply-form');
+
+                if (replyForm.style.display === "none") {
+                    this.textContent = "답글 작성 취소";
+
+                    replyForm.style.display = "block"; // 폼을 표시
+                } else {
+                    this.textContent = "답글";
+                    replyForm.style.display = "none"; // 폼을 숨김
+                }
+            });
+        });
+    });
+
+    var message ="${message}";
+
+    if (message) {
+        alert(message);
+
+    }
+
     function edit(boardId){
         window.location.href = "/board/edit?boardId="+boardId;
 

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Controller
 @RequestMapping("/board")
@@ -16,6 +17,9 @@ public class BoadrController {
 
     @Autowired
     BoardService boardService;
+
+    @Autowired
+    CommentService commentService;
 
     @GetMapping("")
     public String boardMain(Model model){
@@ -68,10 +72,14 @@ public class BoadrController {
 
         boolean check=boardService.postCheck(session,board);
 
+        //댓글 조회
+        List<Comment> comments = commentService.commentFind(boardId);
+
 
         // 받은 파라미터를 사용한 로직 작성
         model.addAttribute("Board", board);
         model.addAttribute("check",check);
+        model.addAttribute("comments",comments);
 
         return "viewPost"; // viewPost.jsp로 데이터 전달
     }
@@ -119,6 +127,9 @@ public class BoadrController {
 
             }
         }
+
+
+
 
 
 
