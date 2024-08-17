@@ -61,6 +61,20 @@ h2 {
     background-color: #c82333;
 }
 
+.deletes-button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+.deletes-button:hover {
+        background-color: #c82333;
+    }
+
+
 /* 작성자와 날짜 스타일 */
 .post-info {
     display: flex;

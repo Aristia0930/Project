@@ -89,8 +89,13 @@
 
                 <p class="comment-author">작성자: ${comment.userName}</p>
                 <p class="comment-content">${comment.contents}</p>
+
                 <div class="comment-submit-container">
                     <button class="reply-btn" >답글</button>
+                <c:if test="${userid==comment.userId}">
+                    <button class="reply-btn"  onclick="edit(${Board.boardId})">수정하기</button>
+                    <button class="deletes-button"   onclick="deleteClick(${Board.boardId})">삭제하기</button>
+                </c:if>
                 </div>
 
 
@@ -115,6 +120,12 @@
                 <div class="reply">
                     <p class="comment-author">작성자:${comment.userName}</p>
                     <p class="comment-content">${comment.contents}</p>
+                    <div class="comment-submit-container">
+                    <c:if test="${userid==comment.userId}">
+                        <button class="reply-btn"  onclick="edit(${Board.boardId})">수정하기</button>
+                        <button class="deletes-button"   onclick="deleteClick(${Board.boardId})">삭제하기</button>
+                    </c:if>
+                    </div>
                 </div></c:if>
             </c:forEach>
         </div>

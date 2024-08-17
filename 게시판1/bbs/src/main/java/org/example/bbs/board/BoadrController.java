@@ -75,11 +75,17 @@ public class BoadrController {
         //댓글 조회
         List<Comment> comments = commentService.commentFind(boardId);
 
+        Users users =(Users)session.getAttribute("userInfo");
+
+        if (users!=null){
+            model.addAttribute("userid",users.getId());
+        }
 
         // 받은 파라미터를 사용한 로직 작성
         model.addAttribute("Board", board);
         model.addAttribute("check",check);
         model.addAttribute("comments",comments);
+
 
         return "viewPost"; // viewPost.jsp로 데이터 전달
     }
