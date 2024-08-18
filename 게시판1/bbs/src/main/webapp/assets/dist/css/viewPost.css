@@ -150,6 +150,25 @@ h2 {
     margin-bottom: 5px;
 }
 
+.replys-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+.replyss-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+
 .reply-btn:hover {
     background-color: #0056b3;
 }
@@ -175,6 +194,35 @@ h2 {
 }
 
 .reply-form textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    resize: none;
+}
+
+
+#replys-form {
+    margin-top: 20px;
+    position: relative;
+}
+
+.replys-form textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    resize: none;
+}
+
+#replyss-form {
+    margin-top: 20px;
+    position: relative;
+}
+
+.replyss-form textarea {
     width: 100%;
     padding: 10px;
     border-radius: 5px;

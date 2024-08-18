@@ -21,6 +21,7 @@ public class BoadrController {
     @Autowired
     CommentService commentService;
 
+    //게시판 페이지 진입
     @GetMapping("")
     public String boardMain(Model model){
         model.addAttribute("LIST",boardService.list());
@@ -119,10 +120,15 @@ public class BoadrController {
     }
 
         //게시글 삭제
-        @DeleteMapping("/delete")
+        @PostMapping("/delete")
         public String delete(@RequestParam("boardId")Long boardId,
                              RedirectAttributes redirectAttributes){
-            boolean check = boardService.delete(boardId);
+
+            Board board = boardService.viewPost(boardId);
+            board.setDeleted(LocalDateTime.now());
+            board.setState(0);
+            boolean check = boardService.editPage(board);
+
 
             if (check) {
                 redirectAttributes.addFlashAttribute("create", "게시글 삭제 성공");

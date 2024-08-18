@@ -54,4 +54,8 @@ public class CommentService {
 
     }
 
+    public Comment replyMdifye(Long replyId) {
+        return commentRepository.findByReplyId(replyId);
+
+    }
 }

@@ -93,8 +93,8 @@
                 <div class="comment-submit-container">
                     <button class="reply-btn" >답글</button>
                 <c:if test="${userid==comment.userId}">
-                    <button class="reply-btn"  onclick="edit(${Board.boardId})">수정하기</button>
-                    <button class="deletes-button"   onclick="deleteClick(${Board.boardId})">삭제하기</button>
+                    <button class="replys-btn" >수정하기</button>
+                    <button class="deletes-button"   onclick="commentdeleteClick(${comment.replyId})">삭제하기</button>
                 </c:if>
                 </div>
 
@@ -110,6 +110,15 @@
                     </div>
                 </form>
 
+                <form class="replys-form" style="display:none;" name="reply" action="/comment/reply-modify" method="post">
+                    <textarea name="contents" rows="4" placeholder="${comment.contents}"></textarea>
+                    <input type="hidden" name="boardId" value="${Board.boardId}">
+                    <input type="hidden" name="replyId" value="${comment.replyId}">
+                    <div class="comment-submit-container">
+                        <button class="submit-comment">답글 수정</button>
+                    </div>
+                </form>
+
 
 
 
@@ -122,11 +131,26 @@
                     <p class="comment-content">${comment.contents}</p>
                     <div class="comment-submit-container">
                     <c:if test="${userid==comment.userId}">
-                        <button class="reply-btn"  onclick="edit(${Board.boardId})">수정하기</button>
-                        <button class="deletes-button"   onclick="deleteClick(${Board.boardId})">삭제하기</button>
+                        <button class="replyss-btn" >수정하기</button>
+                        <button class="deletes-button"   onclick="commentdeleteClick(${comment.replyId})")">삭제하기</button>
                     </c:if>
                     </div>
-                </div></c:if>
+
+                    <form class="replyss-form" style="display:none;" name="reply" action="/comment/reply-modify" method="post">
+                        <textarea name="contents" rows="4" placeholder="${comment.contents}"></textarea>
+                        <input type="hidden" name="boardId" value="${Board.boardId}">
+                        <input type="hidden" name="replyId" value="${comment.replyId}">
+                        <div class="comment-submit-container">
+                            <button class="submit-comment">답글 수정</button>
+                        </div>
+                    </form>
+
+                </div>
+
+
+
+
+                </c:if>
             </c:forEach>
         </div>
     </div>
@@ -155,6 +179,50 @@
         });
     });
 
+    document.addEventListener('DOMContentLoaded', function() {
+        // 모든 답글 버튼에 대해 클릭 이벤트 리스너 추가
+        const replyButtons = document.querySelectorAll('.replys-btn');
+
+        replyButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // 현재 버튼과 같은 댓글 내의 답글 작성 폼을 찾기
+                const commentDiv = this.closest('.comment');
+                const replyForm = commentDiv.querySelector('.replys-form');
+
+                if (replyForm.style.display === "none") {
+                    this.textContent = "답글 수정 취소";
+
+                    replyForm.style.display = "block"; // 폼을 표시
+                } else {
+                    this.textContent = "답글 수정";
+                    replyForm.style.display = "none"; // 폼을 숨김
+                }
+            });
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // 모든 답글 버튼에 대해 클릭 이벤트 리스너 추가
+        const replyButtons = document.querySelectorAll('.replyss-btn');
+
+        replyButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // 현재 버튼과 같은 댓글 내의 답글 작성 폼을 찾기
+                const commentDiv = this.closest('.reply');
+                const replyForm = commentDiv.querySelector('.replyss-form');
+
+                if (replyForm.style.display === "none") {
+                    this.textContent = "답글 수정 취소";
+
+                    replyForm.style.display = "block"; // 폼을 표시
+                } else {
+                    this.textContent = "답글 수정";
+                    replyForm.style.display = "none"; // 폼을 숨김
+                }
+            });
+        });
+    });
+
     var message ="${message}";
 
     if (message) {
@@ -170,7 +238,7 @@
     function deleteClick(boardId) {
         if (confirm("정말로 삭제하시겠습니까?")) {
             fetch("/board/delete?boardId=" + boardId, {
-                method: "DELETE"
+                method: "POST"
             })
                 .then(response => {
                     if (response.redirected) {
@@ -178,6 +246,23 @@
                         window.location.href = response.url;
                     } else {
                         alert("게시글 삭제 실패");
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    }
+
+    function commentdeleteClick(replyId) {
+        if (confirm("정말로 삭제하시겠습니까?")) {
+            fetch("/comment/delete?replyId=" + replyId, {
+                method: "POST"
+            })
+                .then(response => {
+                    if (response.redirected) {
+                        alert("댓글 삭제 성공");
+                        window.location.href = response.url;
+                    } else {
+                        alert("댓글 삭제 실패");
                     }
                 })
                 .catch(error => console.error('Error:', error));

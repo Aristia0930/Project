@@ -29,7 +29,7 @@ public class BoardService {
 
     //목록조회
     public List<Board> list(){
-        return boardRepository.findAll();
+        return boardRepository.findByState(1);
     }
 
     //게시글 내용 조히회
@@ -52,7 +52,7 @@ public class BoardService {
 
     }
 
-    //게시글 수정
+    //게시글 수정/삭제
     @Transactional
     public boolean editPage(Board board) {
         try {
@@ -64,14 +64,6 @@ public class BoardService {
         }
     }
 
-    @Transactional
-    public boolean delete(Long boardId) {
-        try {
-            boardRepository.deleteByBoardId(boardId);
-            return true; // 저장 성공 시 true 반환
-        } catch (Exception e) {
-            // 예외 발생 시 false 반환
-            return false;
-        }
-    }
+
+
 }
