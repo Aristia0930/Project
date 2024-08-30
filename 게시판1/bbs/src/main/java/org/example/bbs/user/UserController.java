@@ -61,7 +61,6 @@ public class UserController {
 
             return "redirect:/user"; // 로그인 성공 시 /home으로 리다이렉트
         } else if (loginResult == 2) {
-            System.out.println("비번 틀림");
             redirectAttributes.addFlashAttribute("error", "Invalid password.");
             return "redirect:/user/login"; // 비밀번호가 틀린 경우
         } else {

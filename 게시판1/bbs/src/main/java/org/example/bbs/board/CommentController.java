@@ -80,7 +80,6 @@ public class CommentController {
         comment.setCreated(LocalDateTime.now());
         comment.setState(1);
         comment.setUserName(users.getName());
-        comment.setCommentId(0L);
         comment.setCommentId(replyId);
 
 
@@ -155,7 +154,6 @@ public class CommentController {
         Comment comment = commentService.replyMdifye(replyId);
         comment.setDeleted(LocalDateTime.now());
         comment.setState(0);
-        System.out.println(replyId);
         boolean check = commentService.create(comment);
 
 
