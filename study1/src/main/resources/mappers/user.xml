@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.example.mybatis.user.UserMapper">
-    <resultMap id="userMap" type="org.example.mybatis.user.UserDto">
+<mapper namespace="org.example.study1.user.UserMapper">
+    <resultMap id="userMap" type="org.example.study1.user.UserDto">
         <id property="id" column="id"/>
         <result property="name" column="name"/>
         <result property="number" column="number"/>
@@ -19,11 +19,11 @@
     </select >
 
 
-    <insert id="insertUser" parameterType="org.example.mybatis.user.UserDto">
+    <insert id="insertUser" parameterType="org.example.study1.user.UserDto">
         INSERT INTO user (id,name,number,age) VALUES (#{id}, #{name}, #{number}, #{age})
     </insert>
 
-    <update id="updateUser" parameterType="org.example.mybatis.user.UserDto">
+    <update id="updateUser" parameterType="org.example.study1.user.UserDto">
         UPDATE user set name=#{name},number=#{number},age=#{age} WHERE id=#{id}
     </update>
 

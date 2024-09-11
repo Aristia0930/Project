@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.study1.scheduled.ScheduleMapper">
+    <resultMap id="schedule" type="org.example.study1.scheduled.ScheduleDto">
+        <id property="title" column="title"/>
+        <result property="startTime" column="startTime"/>
+        <result property="endTime" column="endTime"/>
+        <result property="status" column="status"/>
+    </resultMap>
+
+
+<!--    스케줄목록조회-->
+    <select id="selectSchedule" resultMap="schedule">
+        select * from schedules
+    </select>
+
+
+</mapper>
