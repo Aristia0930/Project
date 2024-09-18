@@ -83,6 +83,12 @@ public class MainController {
             return "schedulList";
         }
 
+        //
+        @GetMapping("/schedule/redirect")
+        public String scheduleredirect(){
+            return "redirect://schedule/list";
+        }
+
 
 
 

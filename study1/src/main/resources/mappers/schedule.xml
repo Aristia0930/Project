@@ -15,5 +15,8 @@
         select * from schedules
     </select>
 
+    <insert id="register"  parameterType="org.example.study1.scheduled.ScheduleDto">
+        INSERT INTO schedules (title,startTime,endTime) VALUES (#{title}, #{startTime}, #{endTime})
+    </insert>
 
 </mapper>

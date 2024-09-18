@@ -8,4 +8,6 @@ import java.util.List;
 public interface ScheduleMapper {
     //목록조회
     List<ScheduleDto> selectSchedule();
+
+    void register(ScheduleDto scheduleDto);
 }

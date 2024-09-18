@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -17,6 +18,13 @@ public class ScheduleController {
     @GetMapping("/register/page")
     public String rePage(){
         return "schRegister";
+    }
+
+    //스케줄 등록하기
+    @PostMapping("/register")
+    public String register(ScheduleDto scheduleDto){
+        scheduleService.register(scheduleDto);
+        return "redirect:/schedule/list";
     }
 
 
