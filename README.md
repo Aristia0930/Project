@@ -11,9 +11,11 @@
 
         jsp와 jpa를 이용하여 게시판 사이트를 만들어보자
 
-2.mybatis
-    mybatis 사용법과 스케줄러사용법 공부
+2. mybatis
+   
+        mybatis 사용법과 스케줄러사용법 공부
 
-3 study1
-    웹소켓 사용법 공부
+3.  study1
+
+        웹소켓 사용법 공부
 
