@@ -16,8 +16,8 @@ public class ChatController {
 
     @MessageMapping("/{roomId}") //여기로 전송되경우 호출 //구독주소 접두사는 send가 도니다
     @SendTo("/app/{roomId}")  //목적지 //다시클라이언트로
-    public ChatEntity sendMessage(@DestinationVariable Long roomId, ChatEntity message){
-        return ChatEntity.builder()
+    public ChatVo sendMessage(@DestinationVariable Long roomId, ChatVo message){
+        return ChatVo.builder()
                 .room(roomId)
                 .sender(message.getSender())
                 .message(message.getMessage())

@@ -9,6 +9,6 @@
 <h3>테스트</h3>
 <a href="/user/list">user목록</a>
 <a href="/schedule/list ">Scheduled 목록</a>
-<a href="/chat/waiting  ">채팅</a>
+<a href="/chat/waiting  ">채팅 테스틍</a>
 </body>
 </html>
